@@ -88,4 +88,3 @@ typings/
 .dynamodb/
 
 # Settings
-config.ini
