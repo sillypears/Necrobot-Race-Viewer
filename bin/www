@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('necrobot-reader:server');
 var http = require('http');
 var dotenv = require('dotenv').config()
-
+var fs = require('fs')
 /**
  * Get port from environment and store in Express.
  */
@@ -18,15 +18,21 @@ app.set('port', port);
 app.set('ip', process.env.IP)
 if (process.env.SECURE > 0) {
   app.set('protocol', "https")
+  options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/cert.pem'),
+    ca: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/chain.pem')
+  }
 } else {
   app.set('protocol', "http")
+  options = {}
 }
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http.createServer(options, app);
 
 /**
  * Listen on provided port, on all network interfaces.
