@@ -5,7 +5,7 @@ html
     link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body.bg-dark.text-light
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+    nav.navbar.navbar-expand-lg.navbar-dark.fixed-top
       a.navbar-brand(href="/") Home
       ul.navbar-nav
         li.nav-item
@@ -26,9 +26,9 @@ html
     if navTitle == "home"
       script(src="/javascripts/index.js")
 
-    footer.fixed-bottom.page-footer
+    footer.text-muted.navbar-dark.bg-dark.fixed-bottom 
       .text-center Find this project on
         a(href="https://github.com/sillypears/Necrobot-Race-Viewer", target="_blank") 
           img(src="/images/GitHub-Mark-32px.png")
-        
+    
 
