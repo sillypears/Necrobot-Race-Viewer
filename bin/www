@@ -16,6 +16,11 @@ var dotenv = require('dotenv').config()
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 app.set('ip', process.env.IP)
+if (process.env.SECURE > 0) {
+  app.set('protocol', "https")
+} else {
+  app.set('protocol', "http")
+}
 
 /**
  * Create HTTP server.

@@ -32,7 +32,7 @@ router.get('/user', function(req, res, next){
 });
 
 router.get('/user/:user', function(req, res, next){
-    uri = 'http://' + req.app.get('ip') + ':'+ req.app.get('port') + '/api/user/' + req.params.user
+    uri = req.app.get('protocol') + '://' + req.app.get('ip') + ':'+ req.app.get('port') + '/api/user/' + req.params.user
     request({
       uri: uri,
     },
