@@ -10,6 +10,8 @@ var http = require('http');
 var https = require('https');
 var dotenv = require('dotenv').config()
 var fs = require('fs')
+var express = require('express');
+
 /**
  * Get port from environment and store in Express.
  */
@@ -41,6 +43,14 @@ var server = ""
 
 if (process.env.SECURE > 0) {
   server = https.createServer(options, app);
+  var h = express()
+  h.set('port', 80)
+  h.get('*', function(req, res, next){
+    res.redirect("https://" + req.headers.host + req.path);
+  });
+  http.createServer(h).listen(h.get('port'), process.env.IP, function(){
+    console.log('HTTP runs hehe');
+  });
 } else {
   server = http.createServer(app);
 }
