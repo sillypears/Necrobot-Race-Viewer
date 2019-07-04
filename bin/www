@@ -14,10 +14,11 @@ var fs = require('fs')
  */
 
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+
 app.set('ip', process.env.IP)
 if (process.env.SECURE > 0) {
   app.set('protocol', "https")
+  app.set('port', 443);
   options = {
     key: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/cert.pem'),
@@ -25,6 +26,7 @@ if (process.env.SECURE > 0) {
   }
 } else {
   app.set('protocol', "http")
+  app.set('port', 80);
   options = {}
 }
 
