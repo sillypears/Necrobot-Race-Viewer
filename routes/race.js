@@ -50,10 +50,10 @@ router.get('/race', function(req, res, next){
             }
 
         }
-        res.render('races', {title: "Last " + raceData.length + " Races", raceData: raceData})
+        res.render('races', {title: "Last " + raceData.length + " Races", navTitle: "race", raceData: raceData})
       } else {
         console.log(error)
-        res.render('races', {title: "No Races Found", raceData:{}, raceCount: 0})
+        res.render('races', {title: "No Races Found", navTitle: "race", raceData:{}, raceCount: 0})
     }
     });
 });

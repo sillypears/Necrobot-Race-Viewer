@@ -7,6 +7,17 @@ html
   body.bg-dark.text-light
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       a.navbar-brand(href="/") Home
+      ul.navbar-nav
+        li.nav-item
+          if(navTitle == "race") 
+            a.nav-link.active(href="/race") Races
+          else
+            a.nav-link(href="/race") Races
+        li.nav-item
+          if(navTitle == "user") 
+            a.nav-link.active(href="/users") Users
+          else
+            a.nav-link(href="/users") Users
         
     block content
     script(src='https://code.jquery.com/jquery-3.4.1.min.js')

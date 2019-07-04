@@ -27,6 +27,10 @@ function formatDate(d) {
     return fDate.toLocaleDateString() + " " + fDate.toLocaleTimeString()
 }
 
+router.get('/user', function(req, res, next){
+    res.render('users', {title: "Users", navTitle: "user"})
+});
+
 router.get('/user/:user', function(req, res, next){
     uri = 'http://' + req.app.get('ip') + ':'+ req.app.get('port') + '/api/user/' + req.params.user
     request({
@@ -43,10 +47,10 @@ router.get('/user/:user', function(req, res, next){
                 raceData[i]["completed"] = false
             }
         }
-        res.render('user', {title: "Stats for " + req.params.user, userName: req.params.user, raceData: raceData})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData})
     } else {
         console.log(error)
-        res.render('user', {title: "Stats for " + req.params.user, userName: req.params.user})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user})
     }
     });
 });
