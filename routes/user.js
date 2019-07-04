@@ -28,7 +28,7 @@ function formatDate(d) {
 }
 
 router.get('/user/:user', function(req, res, next){
-    uri = 'http://localhost:'+ req.app.get('port') + '/api/user/' + req.params.user
+    uri = 'http://' + req.app.get('ip') + ':'+ req.app.get('port') + '/api/user/' + req.params.user
     request({
       uri: uri,
     },
