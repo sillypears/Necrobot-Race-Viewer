@@ -59,6 +59,7 @@ router.get('/race', function(req, res, next){
 });
 
 router.get('/race/:race', function(req, res, next){
+    res.render('race', {title: "Race " + req.params.race, navTitle: "race", raceID: req.params.race})
 
 });
 

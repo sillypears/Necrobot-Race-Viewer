@@ -25,6 +25,7 @@ app.use('/', indexRouter);
 app.get('/user', userRouter);
 app.get('/user/:user', userRouter);
 app.get('/race', raceRouter)
+app.get('/race/:race', raceRouter)
 app.get('/api', apiRouter.api);
 app.get('/api/users', apiRouter.getUsersSearch);
 app.get('/api/user/:user', apiRouter.getUserStats);
