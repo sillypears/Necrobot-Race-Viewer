@@ -28,7 +28,7 @@ function formatDate(d) {
 }
 
 router.get('/race', function(req, res, next){
-    uri = 'http://localhost:'+ req.app.get('port') + '/api/race/'
+    uri = 'http://' + req.app.get('ip') + ':' + req.app.get('port') + '/api/race/'
     request({
       uri: uri,
     },
