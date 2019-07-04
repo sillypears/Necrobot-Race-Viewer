@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  uri = req.app.get('protocol') + '://' + req.app.get('ip') + ':'+ req.app.get('port') + '/api/users'
+  uri = req.app.get('protocol') + '://' + req.app.get('host') + ':'+ req.app.get('port') + '/api/users'
   request({
     uri: uri,
   },

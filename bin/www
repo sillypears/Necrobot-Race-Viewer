@@ -7,24 +7,27 @@
 var app = require('../app');
 var debug = require('debug')('necrobot-reader:server');
 var http = require('http');
+var https = require('https');
 var dotenv = require('dotenv').config()
 var fs = require('fs')
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+//var port = normalizePort(process.env.PORT || '3000');
 
 app.set('ip', process.env.IP)
+app.set('host', process.env.HOST)
 if (process.env.SECURE > 0) {
+  var port = normalizePort(443)
   app.set('protocol', "https")
-  app.set('port', 443);
+  app.set('port', port);
   options = {
     key: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/cert.pem'),
-    ca: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/chain.pem')
+    cert: fs.readFileSync('/etc/letsencrypt/live/get.some.pizza/fullchain.pem'),
   }
 } else {
+  var port = normalizePort(80)
   app.set('protocol', "http")
   app.set('port', 80);
   options = {}
@@ -34,7 +37,13 @@ if (process.env.SECURE > 0) {
  * Create HTTP server.
  */
 
-var server = http.createServer(options, app);
+var server = ""
+
+if (process.env.SECURE > 0) {
+  server = https.createServer(options, app);
+} else {
+  server = http.createServer(app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.
