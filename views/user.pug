@@ -1,0 +1,40 @@
+extends layout
+
+block content
+    header.header.h1.text-center Stats for #{userName}
+    .h3.text-center Last 10 public races
+    table.table.table-dark.table-hover
+        thead
+            tr
+                th.text-center(scope="col") Date
+                th.text-center(scope="col") Rank
+                th.text-center(scope="col") Character
+                th.text-center(scope="col") Time
+                th.text-center(scope="col") Seed
+                th.text-center(scope="col") Completed
+                th.text-center(scope="col") Comment
+        tbody
+            for val in raceData
+                - var href = "/race/" + val.race_id
+                tr 
+                    td.text-center 
+                        a(href=href) #{val.fDate}
+                    if val.completed
+                        td.text-center #{val.rank}
+                    else
+                        td.text-center &nbsp;
+                    if (val.character === "Coh")
+                        td.text-center
+                            img(src="/images/players/cadence-coh.png", title="Cadence", alt="Cadence", height="32px")
+                            img(src="/images/players/link-coh.png", title="Link", alt="Link", height="32px")
+                            img(src="/images/players/zelda-coh.png", title="Zelda", alt="Zelda", height="32px")
+                    else
+                        td.text-center 
+                            img(src="/images/players/" + val.character.toLowerCase() + ".png", title=val.character, alt=val.character, height="32px")
+                    td.text-center #{val.fTime}
+                    td.text-center #{val.seed}
+                    if val.completed
+                        td.text-center ✔
+                    else
+                        td.text-center.table-danger ❌
+                    td #{val.comment}

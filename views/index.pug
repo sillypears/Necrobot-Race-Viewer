@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  input.typeahead.tt-query(spellcheck="false", autocomplete="off", name="typeahead", type="text") 
+  button.btn.btn-sm.btn-primary(type="button" name="click", value="click", title="click", onclick="onSelect()") Search
+  div.users(data-users=userData)
+  

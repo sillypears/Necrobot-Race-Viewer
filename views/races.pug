@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    header.header.h1.text-center Last #{raceData.length} Public Races
+    table.table.table-dark.table-hover
+        thead
+            tr
+                th.text-center(scope="col") Race ID
+                th.text-center(scope="col") Date
+                th.text-center(scope="col") Character
+                th.text-center(scope="col") Race Type
+                th(scope="col") Racers
+        tbody
+            for r in raceData
+                tr
+                    td.text-center.race-id-link
+                        a(href="/race/" + r.r_id) #{r.r_id}
+                    td.text-center #{r.fDate}
+                    if (r.character === "Coh")
+                        td.text-center
+                            img(src="/images/players/cadence-coh.png", title="Cadence", alt="Cadence", height="32px")
+                            img(src="/images/players/link-coh.png", title="Link", alt="Link", height="32px")
+                            img(src="/images/players/zelda-coh.png", title="Zelda", alt="Zelda", height="32px")
+                    else
+                        td.text-center 
+                            img(src="/images/players/" + r.character.toLowerCase() + ".png", title=r.character, alt=r.character, height="32px")
+                    td.text-center #{r.descriptor}
+                    td 
+                      for racer, index in r.splitRacers
+                        a.racer-link(href="/user/" + racer) #{racer}
+                        if (index != (r.splitRacers.length - 1))
+                          |, 
