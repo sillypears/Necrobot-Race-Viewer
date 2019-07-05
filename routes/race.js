@@ -50,16 +50,16 @@ router.get('/race', function(req, res, next){
             }
 
         }
-        res.render('races', {title: "Last " + raceData.length + " Races", navTitle: "race", raceData: raceData, ip: req.connection.remoteAddress})
+        res.render('races', {title: "Last " + raceData.length + " Races", navTitle: "race", raceData: raceData, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
       } else {
         console.log(error)
-        res.render('races', {title: "No Races Found", navTitle: "race", raceData:{}, raceCount: 0, ip: req.connection.remoteAddress})
+        res.render('races', {title: "No Races Found", navTitle: "race", raceData:{}, raceCount: 0, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
     }
     });
 });
 
 router.get('/race/:race', function(req, res, next){
-    res.render('race', {title: "Race " + req.params.race, navTitle: "race", raceID: req.params.race})
+    res.render('race', {title: "Race " + req.params.race, navTitle: "race", raceID: req.params.race, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
 
 });
 

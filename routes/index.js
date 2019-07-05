@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
       res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: userData, secret: req.app.get('secret'), ip: req.connection.remoteAddress});
     } else {
       console.log(error)
-      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: [], ip: req.connection.remoteAddress });
+      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: [], secret: req.app.get('secret'), ip: req.connection.remoteAddress });
     }
   });
 });

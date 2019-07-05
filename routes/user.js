@@ -28,7 +28,7 @@ function formatDate(d) {
 }
 
 router.get('/user', function(req, res, next){
-    res.render('users', {title: "Users", navTitle: "user"})
+    res.render('users', {title: "Users", navTitle: "user", secret: req.app.get('secret'), ip: req.connection.remoteAddress})
 });
 
 router.get('/user/:user', function(req, res, next){
@@ -47,10 +47,10 @@ router.get('/user/:user', function(req, res, next){
                 raceData[i]["completed"] = false
             }
         }
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData, ip: req.connection.remoteAddress})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
     } else {
         console.log(error)
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, ip: req.connection.remoteAddress})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
     }
     });
 });
