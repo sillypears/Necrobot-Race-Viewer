@@ -1,11 +1,20 @@
 const conn = require('../db.js');
 
+
 // @Title APIDocs
 // @Description Describes the API
 // @Accept plain
 // @Produce json
 // @Router /api/ [get]
 exports.api = function (req, res, next) {
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    console.log(shouldShow)
+    
+    if (!shouldShow) {
+        throw "naughty"
+    }
+
     res.json({
         'api': {
             'version': '1.0',
@@ -18,6 +27,13 @@ exports.api = function (req, res, next) {
 };
 
 exports.getUsersSearch = function (req, res, next) {
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    console.log(shouldShow)
+    
+    if (!shouldShow) {
+        throw "naughty"
+    }    
     let getUserSql = `
     SELECT
         u.user_id,
@@ -60,6 +76,13 @@ exports.getUsersSearch = function (req, res, next) {
 };
 
 exports.getUserStats = function (req, res, next) {
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    console.log(shouldShow)
+    
+    if (!shouldShow) {
+        throw "naughty"
+    }
     let getUserStatsSql = `
     SELECT 
     r.race_id,
@@ -105,6 +128,13 @@ LIMIT 10
 };
 
 exports.getLastTwentyRaces = function(req, res, next) {
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    console.log(shouldShow)
+    
+    if (!shouldShow) {
+        throw "naughty"
+    }
     let getLastRacesSql = `
     SELECT 
         r.race_id as r_id, 
@@ -142,5 +172,12 @@ exports.getLastTwentyRaces = function(req, res, next) {
 };
 
 exports.getRaceInfo = function(req, res, next) {
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    console.log(shouldShow)
+    
+    if (!shouldShow) {
+        throw "naughty"
+    }
 
 };
