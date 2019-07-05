@@ -1,34 +1,35 @@
 doctype html
-html
-  head
-    title= title
-    link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body.bg-dark.text-light
-    nav.navbar.navbar-expand-lg.navbar-dark.fixed-top
-      a.navbar-brand(href="/") Home
-      ul.navbar-nav
-        li.nav-item
-          if(navTitle == "race") 
-            a.nav-link.active(href="/race") Races
-          else
-            a.nav-link(href="/race") Races
-        li.nav-item
-          if(navTitle == "user") 
-            a.nav-link.active(href="/user") Users
-          else
-            a.nav-link(href="/user") Users
-        
-    block content
-    script(src='https://code.jquery.com/jquery-3.4.1.min.js')
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js", integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin="anonymous")
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')
-    if navTitle == "home"
-      script(src="/javascripts/index.js")
+if (ip != "37.47.12.233")
+  html
+    head
+      title= title
+      link(href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
+      link(rel='stylesheet', href='/stylesheets/style.css')
+    body.bg-dark.text-light
+      nav.navbar.navbar-expand-lg.navbar-dark.fixed-top
+        a.navbar-brand(href="/") Home
+        ul.navbar-nav
+          li.nav-item
+            if(navTitle == "race") 
+              a.nav-link.active(href="/race") Races
+            else
+              a.nav-link(href="/race") Races
+          li.nav-item
+            if(navTitle == "user") 
+              a.nav-link.active(href="/user") Users
+            else
+              a.nav-link(href="/user") Users
+          
+      block content
+      script(src='https://code.jquery.com/jquery-3.4.1.min.js')
+      script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js", integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM", crossorigin="anonymous")
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')
+      if navTitle == "home"
+        script(src="/javascripts/index.js")
 
-    footer.text-muted.navbar-dark.bg-dark.fixed-bottom 
-      .text-center Find this project on
-        a(href="https://github.com/sillypears/Necrobot-Race-Viewer", target="_blank") 
-          img(src="/images/GitHub-Mark-32px.png")
-    
-
+      footer.text-muted.navbar-dark.bg-dark.fixed-bottom 
+        .text-center Find this project on
+          a(href="https://github.com/sillypears/Necrobot-Race-Viewer", target="_blank") 
+            img(src="/images/GitHub-Mark-32px.png")
+else 
+  img(src="https://tenor.com/view/gnome-your-chums-gnomed-gnome-gnoblin-gnelf-gif-12675740")

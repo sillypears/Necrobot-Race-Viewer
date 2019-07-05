@@ -11,10 +11,10 @@ router.get('/', function (req, res, next) {
   function(error, response, body) {
     if (!error &&  response.statusCode === 200) {
       userData = JSON.parse(body)
-      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: userData });
+      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: userData, ip: req.connection.remoteAddress});
     } else {
       console.log(error)
-      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: [] });
+      res.render('index', { title: 'Necrobot Race Statistics', navTitle: "home", userData: [], ip: req.connection.remoteAddress });
     }
   });
 });

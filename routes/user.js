@@ -47,10 +47,10 @@ router.get('/user/:user', function(req, res, next){
                 raceData[i]["completed"] = false
             }
         }
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData, ip: req.connection.remoteAddress})
     } else {
         console.log(error)
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, ip: req.connection.remoteAddress})
     }
     });
 });
