@@ -1,5 +1,5 @@
 doctype html
-if (ip != "37.47.12.233")
+if (ip != secret)
   html
     head
       title= title
@@ -31,5 +31,7 @@ if (ip != "37.47.12.233")
         .text-center Find this project on
           a(href="https://github.com/sillypears/Necrobot-Race-Viewer", target="_blank") 
             img(src="/images/GitHub-Mark-32px.png")
-else 
-  img(src="https://tenor.com/view/gnome-your-chums-gnomed-gnome-gnoblin-gnelf-gif-12675740")
+else
+  
+  div #{ip} has been naughty
+  img(src="https://media1.tenor.com/images/0d4ae6a62f053c9de883168340169348/tenor.gif")

@@ -20,6 +20,7 @@ var express = require('express');
 
 app.set('ip', process.env.IP)
 app.set('host', process.env.HOST)
+app.set('secret', process.env.SECRET)
 if (process.env.SECURE > 0) {
   var port = normalizePort(443)
   app.set('protocol', "https")
