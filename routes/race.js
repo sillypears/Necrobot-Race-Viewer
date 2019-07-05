@@ -28,6 +28,8 @@ function formatDate(d) {
 }
 
 router.get('/race', function(req, res, next){
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
     uri = req.app.get('protocol') + '://' + req.app.get('host') + ':' + req.app.get('port') + '/api/race/'
     request({
       uri: uri,
@@ -50,16 +52,18 @@ router.get('/race', function(req, res, next){
             }
 
         }
-        res.render('races', {title: "Last " + raceData.length + " Races", navTitle: "race", raceData: raceData, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+        res.render('races', {title: "Last " + raceData.length + " Races", navTitle: "race", raceData: raceData, show: shouldShow})
       } else {
         console.log(error)
-        res.render('races', {title: "No Races Found", navTitle: "race", raceData:{}, raceCount: 0, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+        res.render('races', {title: "No Races Found", navTitle: "race", raceData:{}, raceCount: 0, show: shouldShow})
     }
     });
 });
 
 router.get('/race/:race', function(req, res, next){
-    res.render('race', {title: "Race " + req.params.race, navTitle: "race", raceID: req.params.race, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    res.render('race', {title: "Race " + req.params.race, navTitle: "race", raceID: req.params.race, show: shouldShow})
 
 });
 

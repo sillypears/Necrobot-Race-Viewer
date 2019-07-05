@@ -28,10 +28,14 @@ function formatDate(d) {
 }
 
 router.get('/user', function(req, res, next){
-    res.render('users', {title: "Users", navTitle: "user", secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
+    res.render('users', {title: "Users", navTitle: "user", show: shouldShow})
 });
 
 router.get('/user/:user', function(req, res, next){
+    var secretArray = JSON.parse(req.app.get('secret'))
+    var shouldShow = (secretArray.indexOf(req.connection.remoteAddress) > -1 ) ? false : true
     uri = req.app.get('protocol') + '://' + req.app.get('host') + ':'+ req.app.get('port') + '/api/user/' + req.params.user
     request({
       uri: uri,
@@ -47,10 +51,10 @@ router.get('/user/:user', function(req, res, next){
                 raceData[i]["completed"] = false
             }
         }
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, raceData: raceData, show: shouldShow})
     } else {
         console.log(error)
-        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, secret: req.app.get('secret'), ip: req.connection.remoteAddress})
+        res.render('user', {title: "Stats for " + req.params.user, navTitle: "user", userName: req.params.user, show: shouldShow})
     }
     });
 });
