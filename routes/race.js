@@ -72,7 +72,6 @@ router.get('/race/:race', function(req, res, next){
         shouldShow = false
     }
     uri = req.app.get('protocol') + '://' + req.app.get('host') + ':' + req.app.get('port') + '/api/race/' + raceID;
-    console.log(uri)
     request({
       uri: uri,
     },
