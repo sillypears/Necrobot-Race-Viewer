@@ -15,7 +15,7 @@ block content
                 tr
                     td.text-center.race-id-link
                         a(href="/race/" + r.r_id) #{r.r_id}
-                    td.text-center #{r.fDate}
+                    td.timestamp.text-center #{r.timestamp}
                     if (r.character === "Coh")
                         td.text-center
                             img(src="/images/players/cadence-coh.png", title="Cadence", alt="Cadence", height="32px")

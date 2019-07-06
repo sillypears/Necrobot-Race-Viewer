@@ -3,3 +3,25 @@ extends layout
 block content
 
     header.header.h1.text-center Stats for #{raceID}
+    header.header.h2.text-center.text-muted
+        span.timestamp #{raceDate} 
+        | -- #{raceSeed}
+    table.table.table-hover.table-dark
+        thead
+            tr
+                th.text-center Rank
+                th.text-center Name
+                th.text-center Time
+                th.text-center Comment
+        tbody
+        for racer, index in raceData
+            tr
+                if (racer.finished == true)
+                    td.text-center #{racer.rank}
+                else   
+                    td.text-center &nbsp;
+                td.text-center #{racer.racerName}
+                td.text-center.time #{racer.time}
+                td.comment #{racer.comment}
+
+                

@@ -1,5 +1,5 @@
 const conn = require('../db.js');
-
+const { check, validationResult } = require('express-validator');
 
 // @Title APIDocs
 // @Description Describes the API
@@ -78,33 +78,33 @@ exports.getUserStats = function (req, res, next) {
     if (!shouldShow) {
         throw "naughty"
     }
-
+    let userName = req.params.user
     let getUserStatsSql = `
     SELECT 
-    r.race_id,
-    rr.time,
-    rr.rank,
-    rr.igt,
-    rr.comment,
-    rr.level,
-    r.seed,
-    rt.character,
-    r.timestamp
-FROM
-    race_runs rr
-        LEFT JOIN
-    necrobot.users u ON rr.user_id = u.user_id
-        LEFT JOIN
-    races r ON rr.race_id = r.race_id
-        LEFT JOIN
-    race_types rt ON r.type_id = rt.type_id
-WHERE
-    u.twitch_name = '` + req.params.user + `'
-    OR u.discord_name = '` + req.params.user + `'
-ORDER BY
-	r.timestamp 
-    DESC
-LIMIT 10
+        r.race_id,
+        rr.time,
+        rr.rank,
+        rr.igt,
+        rr.comment,
+        rr.level,
+        r.seed,
+        rt.character,
+        r.timestamp
+    FROM
+        race_runs rr
+            LEFT JOIN
+        necrobot.users u ON rr.user_id = u.user_id
+            LEFT JOIN
+        races r ON rr.race_id = r.race_id
+            LEFT JOIN
+        race_types rt ON r.type_id = rt.type_id
+    WHERE
+        u.twitch_name = '` + userName + `'
+        OR u.discord_name = '` + userName + `'
+    ORDER BY
+        r.timestamp 
+        DESC
+    LIMIT 10
     `
     conn.query(getUserStatsSql, function (error, results, fields) {
         if (error) {
@@ -173,4 +173,43 @@ exports.getRaceInfo = function(req, res, next) {
         throw "naughty"
     }
 
+    let getRaceSql = `
+    SELECT
+        rr.race_id,
+        r.timestamp,
+        rr.time,
+        rr.rank,
+        rr.igt,
+        r.seed,
+        rr.level,
+        rr.comment,
+        u.twitch_name,
+        u.discord_name,
+        rt.descriptor
+    FROM
+        race_runs rr
+            LEFT JOIN
+        users u ON u.user_id = rr.user_id
+            LEFT JOIN
+        races r ON rr.race_id = r.race_id
+            LEFT JOIN
+        race_types rt ON r.type_id = rt.type_id
+    WHERE
+        rr.race_id = '` + req.params.race + `'
+        AND r.private = 0
+    ORDER BY rank ASC`
+    conn.query(getRaceSql, function(error, results, fields){
+        if (error) {
+            res.json({
+                'error': {
+                    'status_code': -3,
+                    'message': error
+                }
+            });
+        } else {
+            res.send(
+                results
+            )
+        }
+    });
 };
