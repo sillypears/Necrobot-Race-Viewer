@@ -29,7 +29,7 @@ function formatRaceTime(t) {
 function formatTimestamp(t) {
     let offset = new Date().getTimezoneOffset()/60;
     let dt = new Date(t)
-    dt.setHours(dt.getHours() - offset)
+    // dt.setHours(dt.getHours() - offset)
     let m = moment(dt)
     return m.format('LLLL')
 }

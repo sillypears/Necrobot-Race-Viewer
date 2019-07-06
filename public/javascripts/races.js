@@ -8,6 +8,6 @@ $(function() {
 function formatTimestamp(t) {
     let offset = new Date().getTimezoneOffset()/60;
     let dt = new Date(t);
-    dt.setHours(dt.getHours() - offset);
+    // dt.setHours(dt.getHours() - offset);
     return moment(dt).format('LLLL');
 }
