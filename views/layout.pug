@@ -10,12 +10,12 @@ if (show)
         a.navbar-brand(href="/") Home
         ul.navbar-nav
           li.nav-item
-            if(navTitle == "race") 
+            if(navTitle === "race" || navTitle === "races") 
               a.nav-link.active(href="/race") Races
             else
               a.nav-link(href="/race") Races
           li.nav-item
-            if(navTitle == "user") 
+            if(navTitle === "user") 
               a.nav-link.active(href="/user") Users
             else
               a.nav-link(href="/user") Users
