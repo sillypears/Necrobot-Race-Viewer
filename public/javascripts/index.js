@@ -11,10 +11,6 @@ $(function() {
     name: 'users',
     source: substringMatcher(userData)
     });
-
-  $('.td-time').each(function() {
-    console.log(this)
-    
     
 });
 
@@ -45,22 +41,4 @@ function onSelect(){
   name = $('input.typeahead.tt-input')[0].value;
   console.log("You selected " + name); 
   window.location = window.location + "user/" + name;
-}
-
-function formatTime(t) {
-  let w = Math.floor(t/100)
-  let ms = Math.floor(((t/100) - w) * 100)
-  let s = Math.floor(t/100 % 60)
-  let m = Math.floor((t/(100*60)) % 60)
-  let h = Math.floor((t/(100*60*60)) % 24)
-  let fTime = ""
-  if (h > 0 ) {
-      fTime += String(h).padStart(2, '0') + ":"
-  }
-  if (m > 0) {
-      fTime += String(m).padStart(2, '0') + ":"
-  }
-  fTime += String(s).padStart(2, '0') + "."
-  fTime += String(ms).padStart(2, '0')
-  return fTime
-}
+};
